@@ -64,21 +64,25 @@ $$
 Para clasificarlo, el modelo sigue este proceso:
 
 Cálculo del Likelihood (Verosimilitud): El modelo evalúa la probabilidad de observar estas palabras juntas dentro de la categoría Spam. Al asumir independencia, multiplicamos la probabilidad de encontrar la palabra premio por la probabilidad de encontrar la palabra ganaste, ambas condicionadas a que el mensaje sea Spam:
+
 $$
 P(\text{premio} \mid \text{Spam}) \cdot P(\text{ganaste} \mid \text{Spam}) \cdot (1 - P(\text{gratis} \mid \text{Spam})) \cdot (1 - P(\text{dinero} \mid \text{Spam})) \cdot (1 - P(\text{oferta} \mid \text{Spam}))
 $$
 
 Cálculo del Numerador: Posteriormente, este resultado se multiplica por el *Prior* de la clase para ponderar qué tan común es el Spam en general:
+
 $$
 [P(\text{premio} \mid \text{Spam}) \cdot P(\text{ganaste} \mid \text{Spam}) \cdot (1 - P(\text{gratis} \mid \text{Spam})) \cdot (1 - P(\text{dinero} \mid \text{Spam})) \cdot (1 - P(\text{oferta} \mid \text{Spam}))] \cdot P(\text{Spam})
 $$
 
 Normalización mediante el Evidence: Finalmente, dividimos por el *Evidence*. Este componente representa la probabilidad total de observar la combinación premio y ganaste en todo nuestro universo de correos, sumando su probabilidad de aparición tanto en la clase Spam como en la clase Ham (No Spam):
+
 $$
 P(\text{Spam} \mid \text{mensaje}) = \frac{[P(\text{premio} \mid \text{Spam}) \cdot P(\text{ganaste} \mid \text{Spam}) \cdot (1 - P(\text{gratis} \mid \text{Spam})) \cdot (1 - P(\text{dinero} \mid \text{Spam})) \cdot (1 - P(\text{oferta} \mid \text{Spam}))] \cdot P(\text{Spam})}{P(\text{X})}
 $$
 
 Donde el *Evidence* se desglosa como la suma de las probabilidades conjuntas de ambas clases:
+
 $$
 P(X) =
 [P(\text{premio} \mid \text{Spam}) \cdot P(\text{ganaste} \mid \text{Spam}) \cdot (1 - P(\text{gratis} \mid \text{Spam})) \cdot (1 - P(\text{dinero} \mid \text{Spam})) \cdot (1 - P(\text{oferta} \mid \text{Spam})) \cdot P(\text{Spam})]
@@ -123,6 +127,7 @@ Imaginemos ahora un nuevo mensaje:
 "Premio Premio Ganaste"
 
 A diferencia de Bernoulli, en este caso cada palabra se representa según su frecuencia dentro del mensaje. Por ejemplo, considerando el vocabulario 
+
 $$
 \begin{bmatrix}
 \text{premio} \\
