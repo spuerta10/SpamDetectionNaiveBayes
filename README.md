@@ -13,6 +13,17 @@
     - 3.2 [Multinomial](#multinomial)
         - 3.2.1 [Ejemplo práctico](#ejemplo-practico)
 - 4. [Estado del arte](#estado-del-arte)
+    - 4.1 [Metsis et al. (2006)](#metsis-et-al-2006)
+    - 4.2 [Mohammed et al. (2013)](#mohammed-et-al-2013)
+    - 4.3 [Hammad & El-Halees (2013)](#hammad-el-halees-2013)
+    - 4.4 [Fusilier et al. (2015)](#fusilier-et-al-2015)
+    - 4.5 [Wu et al. (2017)](#wu-et-al-2017)
+    - 4.6 [Aiyar & Shetty (2018)](#aiyar-shetty-2018)
+    - 4.7 [Mani et al. (2018)](#mani-et-al-2018)
+    - 4.8 [Saeed et al. (2019)](#saeed-et-al-2019)
+    - 4.9 [Kontsewaya et al. (2021)](#kontsewaya-et-al-2021)
+    - 4.10 [Wang (2024)](#wang-2024)
+    - 4.11 [Discusión](#discusion)
 - 5. [Resultados](#resultados)
 - 6. [Consideraciones éticas](#consideraciones-eticas)
 - 7. [Conclusiones](#conclusiones)
@@ -25,6 +36,7 @@ Resumen de 5 lineas.
 
 <a id="intro"></a>
 # 2. Introducción
+
 El crecimiento exponencial de la comunicación digital ha traído consigo un aumento proporcional en la cantidad de mensajes no deseados (spam); se estima que “cada día se envían 160 mil millones de correos electrónicos no deseados” [1]. Asimismo, un agravante de esta situación se presenta tanto en instituciones financieras como en servicios de entrega. Las primeras, al ser objetivos frecuentes de los atacantes, llegan a concentrar “el 27% de los mensajes fraudulentos” [1]. En el caso de los servicios de entrega, el problema es diferente: alrededor de 1.100 millones de mensajes fraudulentos estuvieron relacionados con este tema [1], lo que genera una pérdida de confianza por parte de los usuarios y perjudica la reputación de estas empresas de cara a potenciales usuarios futuros.
 
 Diversos enfoques han sido propuestos para abordar este problema, abarcando desde reglas heurísticas [2] y modelos clásicos de aprendizaje automático como Naive Bayes y Support Vector Machines [2], hasta arquitecturas más complejas basadas en redes neuronales, como Multi Layer Perceptron y modelos de lenguaje como BERT [3]. Sin embargo, a pesar de esta diversidad de enfoques y niveles de complejidad, surge una pregunta fundamental: ¿implica un mayor nivel de complejidad en el modelo un mejor rendimiento?
@@ -33,6 +45,7 @@ El presente artículo busca dar respuesta a esta pregunta mediante la comparaci�
 
 <a id="contexto"></a>
 # 3. Contexto
+
 Cuando hablamos de Naive Bayes, no nos referimos a un algoritmo en particular, sino, mas bien a una familia de algoritmos con diversas variantes: Bernoulli, Complement, Multinomial, entre otros, los cuales han sido ampliamente investigados y usados en la industria para la deteccion de spam.
 
 Su alta adopción en este tipo de aplicaciones se debe a múltiples factores. En primer lugar, estos modelos se caracterizan por su simplicidad y facilidad de implementación, lo que permite su integración en sistemas productivos. Asimismo, presentan una baja complejidad computacional tanto en entrenamiento como en predicción, resultando ideales para el procesamiento de grandes volúmenes de datos textuales [2]-[4], por lo que suelen ser preferidos frente a modelos más complejos como Support Vector Machines o métodos de boosting [2]-[4].
@@ -61,6 +74,7 @@ Si bien estas fórmulas definen el marco general de los modelos bayesianos, su a
 
 <a id="bernoulli"></a>
 ## 3.1 Bernoulli
+
 Supongamos que tenemos un conjunto de 100 correos electrónicos, clasificados de la siguiente manera:
 - 80 son Ham $P(\text{Ham}) = 0.8$
 - 20 son Spam $P(\text{Spam}) = 0.2$ 
@@ -118,6 +132,7 @@ $$
 
 <a id="multinomial"></a>
 ## 3.2 Multinomial
+
 Sin embargo, Bernoulli presenta algunas limitaciones:
 
 - Representa cada mensaje como un vector binario, indicando si una palabra del mensaje está presente o ausente en el vocabulario. Esto implica que, independientemente de si el mensaje es corto o largo, el modelo debe evaluar la presencia o ausencia de cada término del vocabulario [4]. Por ejemplo, si el vocabulario está compuesto por 1000 palabras, para el mensaje "Premio Ganaste" se deberá construir y evaluar un vector de 1000 posiciones.
@@ -215,6 +230,66 @@ Algunas limitaciones presentadas por este modelo son las siguientes:
 
 <a id="estado-del-arte"></a>
 # 4. Estado del arte
+
+La detección de spam ha evolucionado significativamente en las últimas décadas, pasando de enfoques basados en reglas heurísticas a modelos de aprendizaje automático y, más recientemente, a arquitecturas de aprendizaje profundo. En este contexto, los modelos basados en Naive Bayes han sido ampliamente estudiados en la literatura debido a su simplicidad, eficiencia y desempeño competitivo en tareas de clasificación de texto [2].
+
+Con el fin de sintetizar estos aportes, a continuación se presentan algunos trabajos representativos en la literatura, donde se analizan los métodos utilizados y los resultados obtenidos en tareas de detección de spam.
+
+<a id="metsis-et-al-2006"></a>
+## 4.1 Metsis et al. (2006)
+
+Analizan seis conjuntos de datos denominados Enron-Spam, con aproximadamente entre 5,000 y 6,000 mensajes cada uno, manteniendo el orden temporal y variando la proporción de spam para simular escenarios reales. Evalúan cinco variantes de Naive Bayes: Bernoulli multivariante, Multinomial con frecuencia de términos, Multinomial con atributos booleanos, Gaussiano y Flexible Bayes. Los resultados muestran que el Multinomial con atributos booleanos y el Flexible Bayes obtienen el mejor desempeño. No obstante, resaltan que Flexible Bayes presenta una mayor complejidad computacional, lo que limita su uso en sistemas de alta demanda. Concluyen que el Multinomial con atributos booleanos representa un balance adecuado entre precisión y eficiencia [4].
+
+<a id="mohammed-et-al-2013"></a>
+## 4.2 Mohammed et al. (2013)
+
+Utilizan el dataset Email-1431 y seleccionan un subconjunto balanceado de 544 correos electrónicos para el entrenamiento. Proponen un enfoque basado en la generación de un léxico dinámico compuesto por palabras representativas de spam y ham. Evalúan modelos como Naive Bayes, Support Vector Machines, K-Nearest Neighbor, Árboles de Decisión y métodos basados en reglas. Encuentran que Naive Bayes y SVM son los clasificadores más efectivos. Como limitación, destacan que el uso de léxicos estáticos requiere actualizaciones constantes debido a la evolución del lenguaje utilizado en los mensajes de spam [5].
+
+<a id="hammad-el-halees-2013"></a>
+## 4.3 Hammad & El-Halees (2013)
+
+Analizan reseñas de hoteles en árabe utilizando características de contenido, metadatos y atributos del autor. Evalúan modelos como K-Nearest Neighbor, Naive Bayes y Support Vector Machines, encontrando que Naive Bayes alcanza la mayor precisión, con un valor de 99.2%. Como limitación, señalan que el proceso de etiquetado de los datos se realizó de forma manual, lo que puede introducir sesgos en los resultados [6].
+
+<a id="fusilier-et-al-2015"></a>
+## 4.4 Fusilier et al. (2015)
+
+Utilizan un conjunto de 1.600 reseñas de hoteles y proponen el uso de n-gramas de caracteres para la detección de spam. Evalúan modelos como SVM, Naive Bayes y Multinomial Naive Bayes, encontrando que este último obtiene el mejor desempeño en sus experimentos. Además, reportan que el uso de n-gramas de caracteres mejora los resultados frente a n-gramas de palabras entre un 2.1% y 2.3%. Como trabajo futuro, proponen combinar ambas representaciones para mejorar la calidad de los modelos [7].
+
+<a id="wu-et-al-2017"></a>
+## 4.5 Wu et al. (2017)
+
+Emplean un dataset de Twitter que contiene más de 2 millones de mensajes, con una proporción significativa de spam. Proponen un enfoque basado en Deep Learning utilizando Word2Vec y Doc2Vec para aprender representaciones vectoriales de los textos. Evalúan modelos tradicionales como Naive Bayes y Complement Naive Bayes, así como modelos más complejos como Random Forest, Decision Tree y Multi Layer Perceptron. Encuentran que el enfoque basado en redes neuronales alcanza una precisión cercana al 95%, superando a los métodos tradicionales, cuyos resultados se sitúan entre el 80% y 85%. Asimismo, resaltan que los modelos bayesianos presentan una caída significativa en escenarios de datos desbalanceados [8].
+
+<a id="aiyar-shetty-2018"></a>
+## 4.6 Aiyar & Shetty (2018)
+
+Analizan un conjunto de 13.000 comentarios de YouTube y proponen el uso de n-gramas de caracteres en lugar de palabras para mejorar la detección de spam. Evalúan modelos como Multinomial Naive Bayes, Random Forest y Support Vector Machines (SVM), encontrando que este último obtiene el mejor desempeño al utilizar 6-gramas de caracteres. Asimismo, evidencian que Naive Bayes presenta consistentemente el rendimiento más bajo entre los modelos evaluados, especialmente al incrementar el valor de n en los n-gramas. Como limitación, sugieren que el uso de representaciones más avanzadas, como embeddings de palabras, podría mejorar los resultados [9].
+
+<a id="mani-et-al-2018"></a>
+## 4.7 Mani et al. (2018)
+
+Proponen un enfoque de aprendizaje por ensamble que combina Naive Bayes, Random Forest y Support Vector Machines para la detección de spam en reseñas en inglés. Utilizan n-gramas como base para la extracción de características y encuentran que esta combinación mejora la robustez del modelo, alcanzando una precisión de hasta el 87.68%. Destacan que los métodos de ensamble permiten compensar las limitaciones individuales de modelos como Naive Bayes [10].
+
+<a id="saeed-et-al-2019"></a>
+## 4.8 Saeed et al. (2019)
+
+Utilizan dos conjuntos de datos de reseñas de hoteles en árabe y proponen un enfoque de aprendizaje por ensamble que combina clasificadores basados en reglas con modelos de aprendizaje automático. Su metodología incluye el uso de n-gramas y un módulo específico para el manejo de negaciones. Evalúan múltiples modelos, incluyendo Naive Bayes, SVM, KNN, Random Forest y redes neuronales. Encuentran que el enfoque de stacking alcanza los mejores resultados, con precisiones superiores al 95%. Asimismo, reportan que Naive Bayes obtiene un desempeño destacado cuando se integra dentro del ensamble [11].
+
+<a id="kontsewaya-et-al-2021"></a>
+## 4.9 Kontsewaya et al. (2021)
+
+Utilizan un conjunto de 5,728 correos electrónicos en inglés obtenidos de Kaggle y proponen un enfoque basado en técnicas de procesamiento de lenguaje natural, incluyendo preprocesamiento, tokenización y extracción de características mediante CountVectorizer. Evalúan múltiples algoritmos, entre ellos Naive Bayes, K-Nearest Neighbors, Support Vector Machines, Regresión Logística, Árboles de Decisión y Random Forest. Los resultados muestran que la Regresión Logística y Naive Bayes alcanzan los niveles más altos de efectividad, con una precisión cercana al 99%. Como limitación, señalan que el rendimiento de Naive Bayes puede verse afectado cuando el mensaje contiene palabras no observadas durante el entrenamiento [12].
+
+<a id="wang-2024"></a>
+## 4.10 Wang (2024)
+
+Realiza una revisión de sistemas modernos de filtrado de spam, comparando modelos de aprendizaje automático y aprendizaje profundo. Analiza algoritmos como Naive Bayes, Support Vector Machines, Random Forest, BERT y redes convolucionales. Encuentra que, aunque Naive Bayes destaca por su eficiencia y facilidad de implementación, es superado por modelos más complejos en tareas que requieren comprensión contextual. Además, identifica como limitaciones relevantes el concept drift y la aparición de spam generado mediante modelos de lenguaje [2].
+
+<a id="discusion"></a>
+## 4.11 Discusión
+
+A partir de los trabajos revisados, se observa que los modelos basados en Naive Bayes continúan siendo ampliamente utilizados en la detección de spam, debido a su eficiencia y desempeño competitivo en distintos escenarios. Sin embargo, también se evidencian limitaciones relacionadas con la suposición de independencia condicional, la sensibilidad a cambios en la distribución de los datos y la incapacidad para capturar relaciones semánticas complejas. En este contexto, modelos más avanzados, como Support Vector Machines o arquitecturas de Deep Learning, tienden a obtener mejores resultados en escenarios más complejos, aunque a costa de un mayor costo computacional. Esto plantea la necesidad de analizar en qué medida el incremento en la complejidad del modelo se traduce en mejoras significativas en el desempeño, motivando así la comparación propuesta en este trabajo.
+
 <a id="resultados"></a>
 # 5. Resultados
 <a id="consideraciones-eticas"></a>
@@ -230,3 +305,19 @@ Algunas limitaciones presentadas por este modelo son las siguientes:
 [3] https://pmc.ncbi.nlm.nih.gov/articles/PMC8802784/pdf/peerj-cs-08-830.pdf (*)
 
 [4] https://www.researchgate.net/publication/221650814_Spam_Filtering_with_Naive_Bayes_-_Which_Naive_Bayes
+
+[5] https://www.researchgate.net/publication/236970412_Classifying_Unsolicited_Bulk_Email_UBE_using_Python_Machine_Learning_Techniques
+
+[6] https://www.researchgate.net/publication/262765511_An_Approach_for_Detecting_Spam_in_Arabic_Opinion_Reviews
+
+[7] https://www.researchgate.net/publication/312829622_Detection_of_Opinion_Spam_with_Character_n-grams
+
+[8] https://dl.acm.org/doi/epdf/10.1145/3014812.3014815
+
+[9] https://www.sciencedirect.com/science/article/pii/S1877050918309153?ref=pdf_download&fr=RR-2&rr=9f2eb1939b9a441c
+
+[10] https://link.springer.com/chapter/10.1007/978-3-319-96133-0_15
+
+[11] https://www.sciencedirect.com/science/article/pii/S1319157819307414?via%3Dihub
+
+[12] https://www.sciencedirect.com/science/article/pii/S1877050921013016?via%3Dihub
