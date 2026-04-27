@@ -298,26 +298,27 @@ A partir de los trabajos revisados, se observa que los modelos basados en Naive 
 # 7. Conclusiones
 <a id="bibliografia"></a>
 # 8. Bibliografia  
-[1] Spam Statistics 2026: New Data on Junk Email, AI Scams & Phishing https://www.emailtooltester.com/en/blog/spam-statistics/
 
-[2] https://www.scitepress.org/Papers/2024/135260/135260.pdf
+[1] C. Ellis and R. Brandl, "Spam Statistics 2026: Survey on Junk Email, AI Scams & Phishing," EmailTooltester, Oct. 16, 2024. [Online]. Available: https://www.emailtooltester.com/en/blog/spam-statistics/. [Accessed: Apr. 27, 2026].
 
-[3] https://pmc.ncbi.nlm.nih.gov/articles/PMC8802784/pdf/peerj-cs-08-830.pdf (*)
+[2] X. Wang, "Spam Filtering in the Modern Era: A Review of Machine Learning, Deep Learning, and System Comparisons," in *Proc. 2nd Int. Conf. Data Analysis and Machine Learning (DAML)*, 2024, pp. 451-458, doi: 10.5220/0013526000004619.
 
-[4] https://www.researchgate.net/publication/221650814_Spam_Filtering_with_Naive_Bayes_-_Which_Naive_Bayes
+[3] S. Kaddoura, G. Chandrasekaran, D. E. Popescu, and J. H. Duraisamy, "A systematic literature review on spam content detection and classification," *PeerJ Computer Science*, vol. 8, e830, 2022, doi: 10.7717/peerj-cs.830.
 
-[5] https://www.researchgate.net/publication/236970412_Classifying_Unsolicited_Bulk_Email_UBE_using_Python_Machine_Learning_Techniques
+[4] V. Metsis, I. Androutsopoulos, and G. Paliouras, "Spam Filtering with Naive Bayes - Which Naive Bayes?," in *Proc. 3rd Conf. on Email and Anti-Spam (CEAS)*, 2006. [Online]. Available: https://www.researchgate.net/publication/221650814_Spam_Filtering_with_Naive_Bayes_-_Which_Naive_Bayes. [Accessed: Apr. 27, 2026].
 
-[6] https://www.researchgate.net/publication/262765511_An_Approach_for_Detecting_Spam_in_Arabic_Opinion_Reviews
+[5] S. A. Mohammed et al., "Classifying Unsolicited Bulk Email (UBE) using Python Machine Learning Techniques," 2013. [Online]. Available: https://www.researchgate.net/publication/236970412_Classifying_Unsolicited_Bulk_Email_UBE_using_Python_Machine_Learning_Techniques. [Accessed: Apr. 27, 2026].
 
-[7] https://www.researchgate.net/publication/312829622_Detection_of_Opinion_Spam_with_Character_n-grams
+[6] A. S. Hammad and A. M. El-Halees, "An Approach for Detecting Spam in Arabic Opinion Reviews," 2013. [Online]. Available: https://www.researchgate.net/publication/262765511_An_Approach_for_Detecting_Spam_in_Arabic_Opinion_Reviews. [Accessed: Apr. 27, 2026].
 
-[8] https://dl.acm.org/doi/epdf/10.1145/3014812.3014815
+[7] M. Fusilier et al., "Detection of Opinion Spam with Character n-grams," 2015. [Online]. Available: https://www.researchgate.net/publication/312829622_Detection_of_Opinion_Spam_with_Character_n-grams. [Accessed: Apr. 27, 2026].
 
-[9] https://www.sciencedirect.com/science/article/pii/S1877050918309153?ref=pdf_download&fr=RR-2&rr=9f2eb1939b9a441c
+[8] J. Wu et al., "Spam detection study (Twitter dataset)," 2017. [Online]. Available: https://doi.org/10.1145/3014812.3014815. [Accessed: Apr. 27, 2026].
 
-[10] https://link.springer.com/chapter/10.1007/978-3-319-96133-0_15
+[9] R. Aiyar and N. Shetty, "Character n-gram based spam detection study," 2018. [Online]. Available: https://www.sciencedirect.com/science/article/pii/S1877050918309153. [Accessed: Apr. 27, 2026].
 
-[11] https://www.sciencedirect.com/science/article/pii/S1319157819307414?via%3Dihub
+[10] S. Mani, S. Kumari, A. Jain, and P. Kumar, "Spam Review Detection Using Ensemble Machine Learning," in *Machine Learning and Data Mining in Pattern Recognition (MLDM 2018)*, Lecture Notes in Computer Science, vol. 10935. Cham, Switzerland: Springer, 2018, pp. 198-209, doi: 10.1007/978-3-319-96133-0_15.
 
-[12] https://www.sciencedirect.com/science/article/pii/S1877050921013016?via%3Dihub
+[11] R. M. K. Saeed, S. Rady, and T. F. Gharib, "An ensemble approach for spam detection in Arabic opinion texts," *Journal of King Saud University - Computer and Information Sciences*, vol. 34, no. 1, pp. 1407-1416, 2022, doi: 10.1016/j.jksuci.2019.10.002.
+
+[12] O. Kontsewaya et al., "Spam detection in email using machine learning techniques," 2021. [Online]. Available: https://www.sciencedirect.com/science/article/pii/S1877050921013016. [Accessed: Apr. 27, 2026].
