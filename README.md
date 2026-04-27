@@ -1,13 +1,38 @@
-# Resumen
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Logos%C3%ADmbolo_UPB.svg/960px-Logos%C3%ADmbolo_UPB.svg.png" alt="Naive Bayes theorem" width="300" />
+
+| | |
+|-|-|
+| Santiago Puerta | santiago.puertaf@upb.edu.co |
+| Iker Acevedo Vargas | iker.acevedo@upb.edu.co |
+
+# Indice
+- 1. [Resumen](#resumen)
+- 2. [Introducción](#intro)
+- 3. [Contexto](#contexto)
+    - 3.1 [Bernoulli](#bernoulli)
+    - 3.2 [Multinomial](#multinomial)
+        - 3.2.1 [Ejemplo práctico](#ejemplo-practico)
+- 4. [Estado del arte](#estado-del-arte)
+- 5. [Resultados](#resultados)
+- 6. [Consideraciones éticas](#consideraciones-eticas)
+- 7. [Conclusiones](#conclusiones)
+- 8. [Bibliografia](#bibliografia)
+
+<a id="resumen"></a>
+# 1. Resumen
+
 Resumen de 5 lineas. 
-# Introducción
+
+<a id="intro"></a>
+# 2. Introducción
 El crecimiento exponencial de la comunicación digital ha traído consigo un aumento proporcional en la cantidad de mensajes no deseados (spam); se estima que “cada día se envían 160 mil millones de correos electrónicos no deseados” [1]. Asimismo, un agravante de esta situación se presenta tanto en instituciones financieras como en servicios de entrega. Las primeras, al ser objetivos frecuentes de los atacantes, llegan a concentrar “el 27% de los mensajes fraudulentos” [1]. En el caso de los servicios de entrega, el problema es diferente: alrededor de 1.100 millones de mensajes fraudulentos estuvieron relacionados con este tema [1], lo que genera una pérdida de confianza por parte de los usuarios y perjudica la reputación de estas empresas de cara a potenciales usuarios futuros.
 
 Diversos enfoques han sido propuestos para abordar este problema, abarcando desde reglas heurísticas [2] y modelos clásicos de aprendizaje automático como Naive Bayes y Support Vector Machines [2], hasta arquitecturas más complejas basadas en redes neuronales, como Multi Layer Perceptron y modelos de lenguaje como BERT [3]. Sin embargo, a pesar de esta diversidad de enfoques y niveles de complejidad, surge una pregunta fundamental: ¿implica un mayor nivel de complejidad en el modelo un mejor rendimiento?
 
 El presente artículo busca dar respuesta a esta pregunta mediante la comparación del desempeño de una familia de modelos simples, como lo son los Naive Bayes, frente a un modelo más complejo como Multi Layer Perceptron, aplicados a la tarea de detección de spam. Se analizará no solo la calidad de las predicciones, sino también las implicaciones en términos de eficiencia y aplicabilidad en escenarios reales.
 
-# Contexto
+<a id="contexto"></a>
+# 3. Contexto
 Cuando hablamos de Naive Bayes, no nos referimos a un algoritmo en particular, sino, mas bien a una familia de algoritmos con diversas variantes: Bernoulli, Complement, Multinomial, entre otros, los cuales han sido ampliamente investigados y usados en la industria para la deteccion de spam.
 
 Su alta adopción en este tipo de aplicaciones se debe a múltiples factores. En primer lugar, estos modelos se caracterizan por su simplicidad y facilidad de implementación, lo que permite su integración en sistemas productivos. Asimismo, presentan una baja complejidad computacional tanto en entrenamiento como en predicción, resultando ideales para el procesamiento de grandes volúmenes de datos textuales [2]-[4], por lo que suelen ser preferidos frente a modelos más complejos como Support Vector Machines o métodos de boosting [2]-[4].
@@ -34,7 +59,8 @@ $$
 
 Si bien estas fórmulas definen el marco general de los modelos bayesianos, su aplicación depende de cómo se modelan las características del mensaje. Con el objetivo de facilitar la comprensión de la base conceptual de estos algoritmos, iniciaremos analizando la variante Bernoulli, la cual sobresale en la detección de spam basada en la presencia o ausencia de palabras clave.
 
-## Bernoulli
+<a id="bernoulli"></a>
+## 3.1 Bernoulli
 Supongamos que tenemos un conjunto de 100 correos electrónicos, clasificados de la siguiente manera:
 - 80 son Ham $P(\text{Ham}) = 0.8$
 - 20 son Spam $P(\text{Spam}) = 0.2$ 
@@ -90,7 +116,8 @@ P(X) =
 [P(\text{premio} \mid \text{Ham}) \cdot P(\text{ganaste} \mid \text{Ham}) \cdot (1 - P(\text{gratis} \mid \text{Ham})) \cdot (1 - P(\text{dinero} \mid \text{Ham})) \cdot (1 - P(\text{oferta} \mid \text{Ham})) \cdot P(\text{Ham})]
 $$
 
-## Multinomial
+<a id="multinomial"></a>
+## 3.2 Multinomial
 Sin embargo, Bernoulli presenta algunas limitaciones:
 
 - Representa cada mensaje como un vector binario, indicando si una palabra del mensaje está presente o ausente en el vocabulario. Esto implica que, independientemente de si el mensaje es corto o largo, el modelo debe evaluar la presencia o ausencia de cada término del vocabulario [4]. Por ejemplo, si el vocabulario está compuesto por 1000 palabras, para el mensaje "Premio Ganaste" se deberá construir y evaluar un vector de 1000 posiciones.
@@ -115,7 +142,8 @@ donde $f_i$ representa la frecuencia del término $x_i$ en el mensaje.
 
 Adicionalmente, al centrarse en los términos presentes en el mensaje, este enfoque reduce el impacto que tienen las palabras ausentes en el cálculo de la probabilidad.
 
-### Ejemplo práctico
+<a id="ejemplo-practico"></a>
+### 3.2.1 Ejemplo práctico
 
 Supongamos el mismo escenario inicial:
 
@@ -185,11 +213,16 @@ Algunas limitaciones presentadas por este modelo son las siguientes:
 - La relevancia de una palabra que aparece múltiples veces en un mensaje varía dependiendo de la longitud del mismo [4], ya que, a medida que el texto es más largo, su influencia relativa se diluye entre el resto de términos.
 - Su rendimiento no mejora de forma proporcional con la cantidad de datos de entrenamiento, debido a las fluctuaciones en la proporción de mensajes y a los cambios en los temas de spam [4]. Esto implica una inhabilidad por parte del modelo para captar de manera eficiente cambios drásticos en la redacción de los mensajes de spam.
 
-# Estado del arte
-# Resultados
-# Consideraciones éticas
-# Conclusiones
-# Bibliografia  
+<a id="estado-del-arte"></a>
+# 4. Estado del arte
+<a id="resultados"></a>
+# 5. Resultados
+<a id="consideraciones-eticas"></a>
+# 6. Consideraciones éticas
+<a id="conclusiones"></a>
+# 7. Conclusiones
+<a id="bibliografia"></a>
+# 8. Bibliografia  
 [1] Spam Statistics 2026: New Data on Junk Email, AI Scams & Phishing https://www.emailtooltester.com/en/blog/spam-statistics/
 
 [2] https://www.scitepress.org/Papers/2024/135260/135260.pdf
