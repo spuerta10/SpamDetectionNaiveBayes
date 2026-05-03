@@ -11,3 +11,6 @@ wheels/
 
 # ML compressed models
 /models/*.joblib
+
+# Images
+img/*
