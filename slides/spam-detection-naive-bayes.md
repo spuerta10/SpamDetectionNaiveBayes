@@ -13,7 +13,6 @@ style: |
   small.cita-biblio { font-size: 0.48em; line-height: 1.3; color: #444; display: block; margin-top: 0.35em; }
   table { font-size: 0.78em; }
 ---
-
 <!-- _class: lead -->
 
 # Detección de spam en correo electrónico
@@ -23,7 +22,7 @@ style: |
 **Iker Acevedo Vargas** · iker.acevedo@upb.edu.co
 
 ---
-
+<!-- _footer: 'Santiago' -->
 ## Contenido
 
 1. Descripción del problema  
@@ -33,13 +32,13 @@ style: |
 5. Conclusiones  
 
 ---
-
+<!-- _footer: 'Santiago' -->
 <!-- _header: '' -->
 
 # 1. Descripción del problema
 
 ---
-
+<!-- _footer: 'Santiago' -->
 ## Contexto
 
 - Se estima que **cada día** se envían **160 mil millones** de correos electrónicos no deseados<sup class="cite-mark">[1]</sup>.
@@ -51,13 +50,13 @@ style: |
 <small class="cita-biblio"><strong>[1]</strong> C. Ellis y R. Brandl, «Spam Statistics 2026: Survey on Junk Email, AI Scams y Phishing», EmailTooltester, oct. 2024.</small>
 
 ---
-
+<!-- _footer: 'Santiago' -->
 <!-- _header: '' -->
 
 # 2. Estado del arte
 
 ---
-
+<!-- _footer: 'Santiago' -->
 ## Panorama
 
 - El spam ha impulsado la evolución de detectores: desde **reglas heurísticas** y **NB / SVM** hasta **embeddings**, **MLP** y **modelos de lenguaje** como BERT<sup class="cite-mark">[2,3]</sup>.
@@ -67,7 +66,7 @@ style: |
 <small class="cita-biblio"><strong>[2]</strong> X. Wang, «Spam Filtering in the Modern Era: A Review of Machine Learning, Deep Learning, and System Comparisons», en <em>Proc. 2nd Int. Conf. Data Analysis and Machine Learning (DAML)</em>, 2024, pp. 451-458, doi: 10.5220/0013526000004619.<br><strong>[3]</strong> S. Kaddoura et al., «A systematic literature review on spam content detection and classification», <em>PeerJ Computer Science</em>, vol. 8, e830, 2022, doi: 10.7717/peerj-cs.830.</small>
 
 ---
-
+<!-- _footer: 'Iker' -->
 ## Trabajos representativos (I)
 
 | Referencia | Conjunto de datos | Idea clave | Mejor modelo |
@@ -77,7 +76,7 @@ style: |
 | **Fusilier et al. (2015)** | 1 600 reseñas de hoteles | **N-gramas de caracteres**; mejora frente a n-gramas de palabras entre 2.1–2.3 %. | **Multinomial NB** con n-gramas de caracteres. |
 
 ---
-
+<!-- _footer: 'Iker' -->
 ## Trabajos representativos (II)
 
 | Referencia | Conjunto de datos | Idea clave | Mejor modelo |
@@ -87,7 +86,7 @@ style: |
 | **Aiyar & Shetty (2018)** | 13 000 comentarios de YouTube | N-gramas de caracteres; NB el más bajo al crecer $n$. | **SVM** con 6-gramas de caracteres. |
 
 ---
-
+<!-- _footer: 'Santiago' -->
 ## Trabajos representativos (III)
 
 | Referencia | Conjunto de datos | Idea clave | Mejor modelo |
@@ -99,7 +98,7 @@ style: |
 <small class="cita-biblio"><strong>†</strong> <em>OOV (Out-Of-Vocabulary):</em> términos que no aparecieron en el conjunto de entrenamiento y que el modelo no puede representar directamente, lo que puede afectar negativamente su probabilidad estimada.</small>
 
 ---
-
+<!-- _footer: 'Iker' -->
 ## Síntesis
 
 - **NB** sigue siendo *baseline* fuerte no solo en spam de correo electrónico, sino también en detección de spam en **reseñas, redes sociales y foros** (YouTube, Twitter, hoteles) — lo que evidencia su versatilidad más allá del correo.
@@ -109,7 +108,7 @@ style: |
 → Motiva una comparación **controlada** NB vs MLP en **un mismo pipeline** (este proyecto).
 
 ---
-
+<!-- _footer: 'Santiago' -->
 ## Pregunta de investigación
 
 En el estado del arte se han evaluado, entre otros, **Naive Bayes** (variantes), **SVM**, **bosques / ensambles**, **MLP** y representaciones más ricas (**Word2Vec**, **Doc2Vec**, modelos de lenguaje) — con distintos **trade-offs** entre precisión y coste.
@@ -119,7 +118,7 @@ En el estado del arte se han evaluado, entre otros, **Naive Bayes** (variantes),
 - Se contrasta no solo la **calidad de predicción**, sino también el **coste computacional** y la **aplicabilidad** (curvas de aprendizaje, tiempos de entrenamiento e inferencia).
 
 ---
-
+<!-- _footer: 'Santiago' -->
 <!-- _header: '' -->
 
 ## ¿Qué es Naive Bayes?
@@ -136,7 +135,7 @@ $$P(C \mid X) = \frac{P(X \mid C)\,P(C)}{P(X)}$$
 - Robusto ante vocabularios grandes y dispersos (característica típica del texto).
 
 ---
-
+<!-- _footer: 'Santiago' -->
 ## Bernoulli NB — Presencia o ausencia
 
 Representa cada mensaje como un **vector binario**: 1 si la palabra está, 0 si no.
@@ -151,7 +150,7 @@ $$+ \prod_{i=1}^{n} P(x_i \mid \text{Ham})^{x_i}(1-P(x_i \mid \text{Ham}))^{1-x_
 <small class="cita-biblio"><strong>†</strong> El factor $(1 - P(x_i \mid C))$ representa la probabilidad de que la palabra <em>esté ausente</em> dado que el mensaje pertenece a la clase $C$. Cuando $x_i = 0$ este factor se activa, penalizando o favoreciendo la clase según cuán frecuente sea ese término en ella.</small>
 
 ---
-
+<!-- _footer: 'Santiago' -->
 ## Bernoulli NB — Limitaciones
 
 | ⚠️ Limitación | Explicación |
@@ -161,7 +160,7 @@ $$+ \prod_{i=1}^{n} P(x_i \mid \text{Ham})^{x_i}(1-P(x_i \mid \text{Ham}))^{1-x_
 | **Sensible al tamaño del vocabulario** | A mayor vocabulario, más términos ausentes participan en el cálculo del evidence, amplificando el efecto de dilución y pudiendo sesgar la clasificación hacia la clase con mayor prior. |
 
 ---
-
+<!-- _footer: 'Santiago' -->
 ## Bernoulli NB — Caso práctico
 
 **Escenario:** 80 HAM / 20 SPAM · Vocabulario: {premio, ganaste, gratis, dinero, oferta} · Mensaje: *"Premio Ganaste"* → vector $(1,1,0,0,0)$
@@ -178,7 +177,7 @@ $$+\ [P(\text{premio} \mid \text{Ham}) \cdot P(\text{ganaste} \mid \text{Ham}) \
 <small class="cita-biblio"><strong>†</strong> Los 3 términos ausentes (gratis, dinero, oferta) participan activamente mediante los factores $(1 - P(x_i \mid C))$ tanto en el <strong>likelihood</strong> del numerador como en el cálculo del <strong>evidence</strong>, diluyendo la probabilidad final en ambos componentes.</small>
 
 ---
-
+<!-- _footer: 'Santiago' -->
 ## Multinomial NB — Frecuencia de términos
 
 Representa el mensaje con **conteos**: captura cuántas veces aparece cada palabra.
@@ -192,7 +191,7 @@ donde $f_i$ es la frecuencia del término $x_i$ en el mensaje. A diferencia de B
 > **Caso de uso típico:** correos donde la repetición de palabras clave ("gratis", "oferta", "premio") es indicativa de spam.
 
 ---
-
+<!-- _footer: 'Santiago' -->
 ## Multinomial NB — Limitaciones
 
 | ⚠️ Limitación | Explicación |
@@ -202,7 +201,7 @@ donde $f_i$ es la frecuencia del término $x_i$ en el mensaje. A diferencia de B
 | **Concept drift** | Su rendimiento no mejora proporcionalmente con más datos si la distribución del spam cambia; no captura eficientemente variaciones drásticas en la redacción de mensajes. |
 
 ---
-
+<!-- _footer: 'Santiago' -->
 ## Multinomial NB — Caso práctico
 
 **Escenario:** 80 HAM / 20 SPAM · Vocabulario: {premio, ganaste, gratis, dinero, oferta} · Mensaje: *"Premio Premio Ganaste"* → vector $(2,1,0,0,0)$
@@ -219,7 +218,7 @@ $$+\ [P(\text{premio} \mid \text{Ham})^2 \cdot P(\text{ganaste} \mid \text{Ham})
 <small class="cita-biblio"><strong>†</strong> Nótese que gratis, dinero y oferta ($f_i = 0$) no aparecen en ninguna parte del cálculo — a diferencia de Bernoulli, su ausencia no penaliza ni sesga el resultado. Además, la repetición de "premio" ($f_i = 2$) amplifica su influencia en el posterior.</small>
 
 ---
-
+<!-- _footer: 'Santiago' -->
 ## Bernoulli vs Multinomial — Trade-offs
 
 | Dimensión | Bernoulli | Multinomial |
@@ -232,13 +231,13 @@ $$+\ [P(\text{premio} \mid \text{Ham})^2 \cdot P(\text{ganaste} \mid \text{Ham})
 > En la literatura (Metsis et al., 2006), **Multinomial con binarización** (*boolean*) suele lograr el mejor balance en corpus de correo electrónico.
 
 ---
-
+<!-- _footer: 'Iker' -->
 <!-- _header: '' -->
 
 # 3. Metodología y experimento
 
 ---
-
+<!-- _footer: 'Iker' -->
 ## Conjunto de datos — Enron-Spam
 
 - **Fuente:** corpus público derivado de los correos internos de Enron, ampliamente usado como benchmark en detección de spam.
@@ -249,7 +248,7 @@ $$+\ [P(\text{premio} \mid \text{Ham})^2 \cdot P(\text{ganaste} \mid \text{Ham})
 - **Consideración:** el corpus no representa todos los escenarios del mundo real (sesgo hacia inglés corporativo); esto se discute en las conclusiones.
 
 ---
-
+<!-- _footer: 'Iker' -->
 ## Flujo general
 
 1. Carga de datos y **reserva** de una fracción mínima para **despliegue** (≈ 0.02%).
@@ -259,7 +258,7 @@ $$+\ [P(\text{premio} \mid \text{Ham})^2 \cdot P(\text{ganaste} \mid \text{Ham})
 5. **Evaluación:** métricas de clasificación, comparación, curvas ROC, curvas de aprendizaje, tiempos.
 
 ---
-
+<!-- _footer: 'Iker' -->
 ## Exploración de datos (EDA)
 
 ### ¿Existe una diferencia clara entre correo HAM y SPAM?
@@ -267,25 +266,25 @@ $$+\ [P(\text{premio} \mid \text{Ham})^2 \cdot P(\text{ganaste} \mid \text{Ham})
 Antes de ajustar clasificadores, revisamos si el texto muestra **patrones distintivos** por clase.
 
 ---
-
+<!-- _footer: 'Iker' -->
 ## Nubes de palabras (HAM vs SPAM)
 
 ![width:900px](../img/words-cloud-spam-vs-ham.png)
 
 ---
-
+<!-- _footer: 'Iker' -->
 ## Nubes de palabras — Interpretación
 
 - **Spam:** predominan `www`, `http` y `com` en 1 y 2-gramas — la mayoría de correos spam traen **hipervínculos asociados**, señal discriminativa fuerte. Acompañados de vocabulario de captación: `free`, `offer`, `save`, `money`.
 - **HAM (Enron):** vocabulario **corporativo muy específico** — `enron` — y comunicación interna: `schedule`, `meeting`, `attached`.
 ---
-
+<!-- _footer: 'Iker' -->
 ## Longitud del texto (HAM vs SPAM)
 
 ![width:900px](../img/boxplot-spam-vs-ham.png)
 
 ---
-
+<!-- _footer: 'Iker' -->
 ## Longitud del texto — Interpretación
 
 - **SPAM:** correos generalmente más cortos — caja más compacta y bigote superior menor tanto en caracteres como en palabras. Sin embargo, es la clase con los **outliers más extremos** (~20 000 caracteres), lo que refleja una **alta variabilidad**.
@@ -293,7 +292,7 @@ Antes de ajustar clasificadores, revisamos si el texto muestra **patrones distin
 - **Conclusión:** el enorme solapamiento entre clases y la abundancia de outliers en ambas indica que la **longitud sola no es un discriminador confiable** entre HAM y SPAM.
 
 ---
-
+<!-- _footer: 'Iker' -->
 ## ¿Por qué no basta con heurísticas?
 
 El EDA revela que construir reglas simples para separar HAM y SPAM es prácticamente inviable:
@@ -304,13 +303,13 @@ El EDA revela que construir reglas simples para separar HAM y SPAM es prácticam
 → Se requiere una técnica que evalúe **combinaciones de señales simultáneamente** y de forma **probabilística o paramétrica** — motivando la comparación **Naive Bayes vs MLP**.
 
 ---
-
+<!-- _footer: 'Santiago' -->
 ## Modelos Naive Bayes considerados
 
 ![width:1200px](../img/naive-bayes-algorithms-comparison.png)
 
 ---
-
+<!-- _footer: 'Iker' -->
 ## Entrenamiento y evaluación
 
 - **Partición:** `train_test_split` **estratificado** (p. ej. 80 % / 20 %), semilla fija.
@@ -318,19 +317,19 @@ El EDA revela que construir reglas simples para separar HAM y SPAM es prácticam
 - **Selección:** comparación sistemática entre pipelines y búsqueda de mejores hiperparametros. 
 
 ---
-
+<!-- _footer: 'Santiago' -->
 <!-- _header: '' -->
 
 # 4. Resultados
 
 ---
-
+<!-- _footer: 'Santiago' -->
 ## Curvas ROC
 
 ![width:800px](../img/models-roc-curves.png)
 
 ---
-
+<!-- _footer: 'Santiago' -->
 ## Curvas ROC — Interpretación
 
 - **MLP** lidera con la mejor curva TP vs FP a tasas de FP bajas (0–0.005), pero comparte **AUC = 0.999** con MultinomialNB y ComplementNB — la diferencia es de décimas de punto porcentual, prácticamente **despreciable**.
@@ -339,13 +338,13 @@ El EDA revela que construir reglas simples para separar HAM y SPAM es prácticam
 
 
 ---
-
+<!-- _footer: 'Santiago' -->
 ## Curvas de aprendizaje
 
 ![width:1200px](../img/models-learning-curve.png)
 
 ---
-
+<!-- _footer: 'Santiago' -->
 ## Curvas de aprendizaje — Interpretación
 
 - **MultinomialNB** es el modelo más estable: training y CV convergen cerca de 0.998, con la **menor desviación estándar** de los cuatro — predicciones consistentes ante datos nuevos, característica clave en entornos productivos.
@@ -353,16 +352,37 @@ El EDA revela que construir reglas simples para separar HAM y SPAM es prácticam
 - **MultinomialBinaryNB y ComplementNB** presentan las mayores brechas entre training y CV, con bandas de CV muy amplias — mayor varianza y menor confiabilidad en producción.
 
 ---
-
+<!-- _footer: 'Santiago' -->
 ## Coste computacional
 
 ![width:1200px](../img/models-fit-vs-inference.png)
 
 ---
-
+<!-- _footer: 'Santiago' -->
 ## Coste computacional — Interpretación
 
 - **Fit time:** MLP opera un **orden de magnitud por encima** de los modelos NB — si NB tarda 100 minutos en entrenarse, MLP tardaría ~4.000 minutos (~2.5 días).
 - **Score time:** MLP es ~×3 más lento que sus contrapartes NB en inferencia — si NB tarda 1h en predecir, MLP tardaría ~3h. Además, su **banda de incertidumbre es la más amplia** de los cuatro modelos, lo que implica un comportamiento impredecible en entornos productivos.
 - **NB:** tiempos de entrenamiento e inferencia notablemente inferiores, con bandas de desviación estándar estrechas — comportamiento **estable y predecible** a escala.
 - **Conclusión:** un modelo con rendimiento marginalmente superior en AUC pero con un coste computacional ordenes de magnitud mayor, **no es necesariamente la mejor elección** en producción.
+
+---
+<!-- _footer: 'Iker' -->
+# 5. Conclusiones
+
+---
+<!-- _footer: 'Iker' -->
+## Mensajes clave
+
+- **Mayor complejidad ≠ mejor desempeño:** MLP logra el mejor F1 (0.9930) pero la diferencia frente a ComplementNB (F1=0.9903) es marginal — a un coste computacional órdenes de magnitud mayor.
+- **MultinomialNB minimiza falsos negativos** con el recall más alto (0.9985) — en detección de spam, dejar pasar un correo malicioso tiene un coste mayor que filtrar uno legítimo; este es el criterio prioritario.
+- **El preprocesamiento es determinante:** lematización + stop words + TF-IDF con bigramas permitió que incluso los modelos más simples superaran el 98% en todas las métricas.
+- **Veredicto:** Naive Bayes (Multinomial y Complement) es la opción más sólida para producción — desempeño competitivo, tiempos de entrenamiento e inferencia notablemente menores y comportamiento estable y predecible.
+
+---
+<!-- _footer: 'Iker' -->
+## Trabajo futuro
+
+- Siguiendo a Fusilier et al. (2015) y Aiyar & Shetty (2018), explorar **n-gramas de caracteres** en lugar de palabras para evaluar si la representación a nivel de letra mejora el rendimiento.
+- Incorporar **concept drift**, datos más recientes y **spam generado** con modelos de lenguaje.
+- Considerar **sesgos** del corpus (Enron no representa todo el mundo), **privacidad** y **transparencia** en despliegue.
