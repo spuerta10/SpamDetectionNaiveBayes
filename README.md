@@ -32,7 +32,7 @@
 <a id="resumen"></a>
 # 1. Resumen
 
-EL spam representa una amenaza constante para las comunicaciones por correo electronico, millones de mensajes fraudulentos son enviados diariamente. Este trabajo compara el desempeño de tres variantes de Naive Bayes (Multinomial, Multinomial Binario y complement) frente a un Perceptron Multicapa (MLP) en la deteccion de spam sobre corpus Enron, compuesto por 33.716 correos electrónicos. Los modelos fueron evaluados mediante validacion cruzada con énfasis en recall, dado el costo asimétrico de los falsos negativos en esta tarea. Los resultados muestran que el MultinomialNB alcanza el mayor recall (0.9985), mientras que MLP obtiene el mejor balance con un F1-score de (0.9930). se concluye que la complejidad del modelo no garantiza mejor desempeño y que Naive Bayes representa una alternativa eficiente y competitiva para esta tarea.
+EL spam representa una amenaza constante para las comunicaciones por correo electrónico, millones de mensajes fraudulentos son enviados diariamente. Este trabajo compara el desempeño de tres variantes de Naive Bayes (Multinomial, Multinomial Binario y complement) frente a un Perceptrón Multicapa (MLP) en la detección de spam sobre corpus Enron, compuesto por 33.716 correos electrónicos. Los modelos fueron evaluados mediante validación cruzada con énfasis en recall, dado el costo asimétrico de los falsos negativos en esta tarea. Los resultados muestran que el MultinomialNB alcanza el mayor recall (0.9985), mientras que MLP obtiene el mejor balance con un F1-score de (0.9930). Se concluye que la complejidad del modelo no garantiza mejor desempeño y que Naive Bayes representa una alternativa eficiente y competitiva para esta tarea.
 
 **Palabras clave:** detección de spam, Naive Bayes, Multinomial NB, Complement NB, Perceptrón Multicapa, clasificación de texto, TF-IDF, procesamiento de lenguaje natural, corpus Enron, aprendizaje automático.
 
@@ -49,7 +49,7 @@ El presente artículo busca dar respuesta a esta pregunta mediante la comparaci�
 <a id="contexto"></a>
 # 3. Contexto
 
-Cuando hablamos de Naive Bayes, no nos referimos a un algoritmo en particular, sino, mas bien a una familia de algoritmos con diversas variantes: Bernoulli, Complement, Multinomial, entre otros, los cuales han sido ampliamente investigados y usados en la industria para la deteccion de spam.
+Cuando hablamos de Naive Bayes, no nos referimos a un algoritmo en particular, sino, más bien a una familia de algoritmos con diversas variantes: Bernoulli, Complement, Multinomial, entre otros, los cuales han sido ampliamente investigados y usados en la industria para la detección de spam.
 
 Su alta adopción en este tipo de aplicaciones se debe a múltiples factores. En primer lugar, estos modelos se caracterizan por su simplicidad y facilidad de implementación, lo que permite su integración en sistemas productivos. Asimismo, presentan una baja complejidad computacional tanto en entrenamiento como en predicción, resultando ideales para el procesamiento de grandes volúmenes de datos textuales [2]-[4], por lo que suelen ser preferidos frente a modelos más complejos como Support Vector Machines o métodos de boosting [2]-[4].
 
@@ -296,11 +296,11 @@ A partir de los trabajos revisados, se observa que los modelos basados en Naive 
 <a id="resultados"></a>
 # 5. Resultados
 
-## 5.1 Configuracion del método
+## 5.1 Configuración del método
 
-El preprocesamiento aplicado a cada correo incluyó: eliminacion de cabeceras (Subject, From, To), URLs, direcciones de correo, caracteres especiales y números; seguido de tokenización, remoción de stop words y lematización mediante WordNetLemmatizer de NLTK. Las representaciones textuales se generaron con TF - IDF (unigramas y bigramas, máximo de 50.000 características) para MultinomialNB y ComplementNB, y con CountVectorizer binario para Multinomial Binary NB. El conjunto de entrenamiento corresponde al 80% del corpus Enron (33.716 correos), reservando el 20% para hacer la evaluación.
+El preprocesamiento aplicado a cada correo incluyó: eliminación de cabeceras (Subject, From, To), URLs, direcciones de correo, caracteres especiales y números; seguido de tokenización, remoción de stop words y lematización mediante WordNetLemmatizer de NLTK. Las representaciones textuales se generaron con TF - IDF (unigramas y bigramas, máximo de 50.000 características) para MultinomialNB y ComplementNB, y con CountVectorizer binario para Multinomial Binary NB. El conjunto de entrenamiento corresponde al 80% del corpus Enron (33.716 correos), reservando el 20% para hacer la evaluación.
 
-La busqueda de hiperparámetros se realizo con GridSearchCV (5-fold, métrica: recall) para los modelos de Naive Bayes, y con RandomizedSearchCV para el MLP. Los mejores parámetros encontrados fueron:
+La búsqueda de hiperparámetros se realizó con GridSearchCV (5-fold, métrica: recall) para los modelos de Naive Bayes, y con RandomizedSearchCV para el MLP. Los mejores parámetros encontrados fueron:
 
 | Modelo | Hiperparámetros óptimos |
 |--------|------------------------|
@@ -311,7 +311,7 @@ La busqueda de hiperparámetros se realizo con GridSearchCV (5-fold, métrica: r
 
 ## 5.2 Calidad obtenida
 
-Los modelos fueron evaluados en le conjunto de pruebas con las métricas de acurracy, precision, recall y F1-score:
+Los modelos fueron evaluados en el conjunto de pruebas con las métricas de accuracy, precision, recall y F1-score:
 
 | Modelo | Accuracy | Precision | F1 | Recall |
 |--------|----------|-----------|----|--------|
@@ -324,37 +324,37 @@ El MLP obtuvo el mejor balance general entre métricas. No obstante, Multinomial
 
 ## 5.3 Ejemplo de despliegue
 
-El modelo final (MultinomialNB) fue reentrenado con el 100% del corpus y serializado con `joblib`. El notebook `deployment.ipynb` carga el pipeline y clasifica nuevos correos preprocesando el texto con la misma funcion de limpieza utilizada durante el entrenamiento. Sobre un conjunto de 7 correos no vistos, el modelo clasificó correctamente todos los mensajes, asignando la etiqueta 0 (ham) o 1 (spam) según lo detectado por el modelo.
+El modelo final (MultinomialNB) fue reentrenado con el 100% del corpus y serializado con `joblib`. El notebook `deployment.ipynb` carga el pipeline y clasifica nuevos correos preprocesando el texto con la misma función de limpieza utilizada durante el entrenamiento. Sobre un conjunto de 7 correos no vistos, el modelo clasificó correctamente todos los mensajes, asignando la etiqueta 0 (ham) o 1 (spam) según lo detectado por el modelo.
 
 <a id="consideraciones-eticas"></a>
 # 6. Consideraciones éticas
 
-El desarrollo de sistemas de deteccion de spam implica consideraciones éticas que pueden tenerse en cuenta tanto en el diseño como en el despliegue del modelo.
+El desarrollo de sistemas de detección de spam implica consideraciones éticas que pueden tenerse en cuenta tanto en el diseño como en el despliegue del modelo.
 
-En primer lugar, existe el riesgo de **falsos positivos**: correo legítimos clasificados incorrectamente como spam. Esto puede tener consecuencias graves, como la pérdida de comunicaciones importantes. Por esta razón, la métrica de recall fue priorizada durante el entrenamiento, minimizando los falsos negativos, aunque esto puede aumentar ligeramente los falsos positivos.
+En primer lugar, existe el riesgo de **falsos positivos**: correos legítimos clasificados incorrectamente como spam. Esto puede tener consecuencias graves, como la pérdida de comunicaciones importantes. Por esta razón, la métrica de recall fue priorizada durante el entrenamiento, minimizando los falsos negativos, aunque esto puede aumentar ligeramente los falsos positivos.
 
-En segundo lugar, el corpus Enron utilizado para el entrenamiento proviene de correos reales de empleados de una empresa específica, lo que puede introducir **sesgos culturales y lingüísticos**. Un modelo entrenado exclusivamente con este corpues podría tener un desempeño menor en poblaciones o contextos diferentes, como corros en otros idiomas o de otros sectores.
+En segundo lugar, el corpus Enron utilizado para el entrenamiento proviene de correos reales de empleados de una empresa específica, lo que puede introducir **sesgos culturales y lingüísticos**. Un modelo entrenado exclusivamente con este corpus podría tener un desempeño menor en poblaciones o contextos diferentes, como correos en otros idiomas o de otros sectores.
 
-En tercer lugar, la automatización del filtrado de correos implica un procesamiento masivo de **comunicaciones privadas**. Aunque en este trabajo los datos son públicos y anonimizados, en un entorno de producción real sería  necesario garantizar el cumpliento de regulaciones de privacidad como el GDPR o la ley 1581 de Colombia.
+En tercer lugar, la automatización del filtrado de correos implica un procesamiento masivo de **comunicaciones privadas**. Aunque en este trabajo los datos son públicos y anonimizados, en un entorno de producción real sería  necesario garantizar el cumplimiento de regulaciones de privacidad como el GDPR o la ley 1581 de Colombia.
 
-Finalmente, a medida que los modelos de detección mejoran, los generadores de spam también evolucionan. El uso modelos de lenguaje para generar spam más sofisticado representa un desafío ético y técnico emergente que los sistemas actuales, incluido el presentado en este trabajo, no están diseñados para enfrentar complemente. 
+Finalmente, a medida que los modelos de detección mejoran, los generadores de spam también evolucionan. El uso de modelos de lenguaje para generar spam más sofisticado representa un desafío ético y técnico emergente que los sistemas actuales, incluido el presentado en este trabajo, no están diseñados para enfrentar completamente. 
 
 
 <a id="conclusiones"></a>
 # 7. Conclusiones
 
-Este trabajo evaluó el desmpeño de tres variantes de Naive Bayes frente a un Perceptrón Multicapa en la tarea de detección de spam sobre el corpus Enror. A partir de los resultados obtenidos, se derican las siguentes conclusion:
+Este trabajo evaluó el desempeño de tres variantes de Naive Bayes frente a un Perceptrón Multicapa en la tarea de detección de spam sobre el corpus Enron. A partir de los resultados obtenidos, se derivan las siguientes conclusiones:
 
 En primer lugar, la hipótesis central del trabajo se confirma parcialmente: **una mayor complejidad del modelo no garantiza un mejor desempeño**. El MLP obtuvo el mejor balance general (F1=0.9930, Accuracy=0.9929), pero la diferencia frente a ComplementNB (F1=0.9903) es marginal, siendo el MLP considerablemente más costoso en tiempo de entrenamiento.
 
-En segundo lugar, **MultinomialNB demostró ser el modelo más efectivo para minimizar falsos negativos**, alcanzando el recall mas alto (0.9985). En el contexto de deteccion de spam, donde dejar pasar un correo malicioso tiene un costo mayor que filtrar uno legítimo, este resultado es especialmente relevante.
+En segundo lugar, **MultinomialNB demostró ser el modelo más efectivo para minimizar falsos negativos**, alcanzando el recall más alto (0.9985). En el contexto de detección de spam, donde dejar pasar un correo malicioso tiene un costo mayor que filtrar uno legítimo, este resultado es especialmente relevante.
 
-En tercer lugar, la **calidad del preprocesamiento tuvo un impacto determinante** en el rendimiento de todos los modelos. La combinación de lematización, elimminación de stop words y representación TF-IDF con bigramas permitió que incluso los modelos más simples alcanzaran métricas superiores al 98%.
+En tercer lugar, la **calidad del preprocesamiento tuvo un impacto determinante** en el rendimiento de todos los modelos. La combinación de lematización, eliminación de stop words y representación TF-IDF con bigramas permitió que incluso los modelos más simples alcanzaran métricas superiores al 98%.
 
 Finalmente, se concluye que **Naive Bayes, en sus variantes Multinomial y Complement, representa una opción sólida y eficiente** para la detección de spam en producción, ofreciendo un desempeño con tiempos de entrenamiento e inferencia notablemente menores que los modelos de redes neuronales.
 
 <a id="bibliografia"></a>
-# 8. Bibliografia  
+# 8. Bibliografía  
 
 [1] C. Ellis and R. Brandl, "Spam Statistics 2026: Survey on Junk Email, AI Scams & Phishing," EmailTooltester, Oct. 16, 2024. [Online]. Available: https://www.emailtooltester.com/en/blog/spam-statistics/. [Accessed: Apr. 27, 2026].
 
